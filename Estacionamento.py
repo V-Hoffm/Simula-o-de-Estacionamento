@@ -10,7 +10,6 @@ vaga = []
 cont = -1
 cont_vga = 0
 while True:
-    # print (f"estão disponiveis as vagas{SetorA - Vagas_ocupadas}no setor A")
     print (f"Existem {cont_vga} vagas ocupadas neste estacionamento") # mudar
     if len(Vagas_ocupadas)== 17:
         print ("Todas as vagas estão ocupadas...")
@@ -21,7 +20,6 @@ while True:
     if vaga in Vagas_ocupadas:
         print("Vaga já ocupada, sorteando outra...")
         continue  
-    # Vagas_ocupadas = np.append(Vagas_ocupadas,vaga)
     Vagas_ocupadas[vaga] = vaga
     cont += 1 
     cont_vga +=1
@@ -29,7 +27,7 @@ while True:
     while True:
         placa_carro = input('Digite a placa do seu carro: ')
         if placa_carro in Placas:
-            print ("Este carro ja está em outra vaga") #funciona mas ele sorteia outra vaga para o carro, deixar de um jeito que apenas peça para digitar outra placa
+            print ("Este carro ja está em outra vaga") 
             Vagas_ocupadas[cont] = None
             continue
         elif placa_carro == "":
