@@ -11,7 +11,8 @@ cont = -1
 cont_vga = 0
 while True:
     print (f"Existem {cont_vga} vagas ocupadas neste estacionamento") # mudar
-    if len(Vagas_ocupadas)== 17:
+    qt = np.count_nonzero(Vagas_ocupadas == None)
+    if qt == 1:
         print ("Todas as vagas estão ocupadas...")
         break     
     vaga = random.randint(1, 15)
