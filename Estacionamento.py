@@ -10,7 +10,7 @@ vaga = []
 cont = -1
 cont_vga = 0
 while True:
-    print (f"Existem {cont_vga} vagas ocupadas neste estacionamento") # mudar
+    print (f"Existem {cont_vga} vagas ocupadas neste estacionamento")
     qt = np.count_nonzero(Vagas_ocupadas == None)
     if qt == 1:
         print ("Todas as vagas estão ocupadas...")
@@ -52,7 +52,18 @@ while True:
                     Placas [vaga_estacionada] = None
                     cont -=1
                     cont_vga -=1
-                    print (Vagas_ocupadas)
+                    print (Vagas_ocupadas)  
                     break
         else:
             break
+        consulta = input ("Você quer consultar algum veiculo? (S/N)")
+    if "S" in consulta.upper():
+        while True:
+            placa_consulta = input("digite a placa do carro que você quer consultar")
+            if placa_consulta in Vagas_ocupadas:
+                indice_placa = Placas.index(placa_consulta)
+                vaga_correspondente = Vagas_ocupadas(indice_placa)
+                print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor ")
+            else:
+                print ("Não existe nenhum veiculo com esta placa no estacionamento, verifique se digitou corretamente")
+                continue
