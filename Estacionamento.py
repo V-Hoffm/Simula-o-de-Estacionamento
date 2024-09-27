@@ -47,6 +47,9 @@ while True:
                 if Vagas_ocupadas[vaga_estacionada] == None:
                     print('esta vaga não esta ocupada')
                     continue
+                elif Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
+                    print("não existe nenhum carro estacionado nesse estacionamento")
+                    break
                 else:
                     Vagas_ocupadas[vaga_estacionada] = None 
                     Placas [vaga_estacionada] = None
@@ -56,14 +59,21 @@ while True:
                     break
         else:
             break
-    consulta = input ("Você quer consultar algum veiculo? (S/N)")
-    if "S" in consulta.upper():
-        while True:
-            placa_consulta = input("digite a placa do carro que você quer consultar")
-            if placa_consulta in Placas:
-                indice_placa = np.where(Placas == placa_consulta)
-                vaga_correspondente = indice_placa[0]
-                print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor ")
-            else:
-                print ("Não existe nenhum veiculo com esta placa no estacionamento, verifique se digitou corretamente")
-                continue
+    while True:
+        consulta = input ("Você quer consultar algum veiculo? (S/N)")
+        if "S" in consulta.upper():
+            while True:
+                placa_consulta = input("digite a placa do carro que você quer consultar")
+                if placa_consulta in Placas:
+                    indice_placa = np.where(Placas == placa_consulta)[0][0]
+                    vaga_correspondente = Vagas_ocupadas[indice_placa]
+                    print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor ")
+                elif Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
+                    print("não existe nenhum carro estacionado nesse estacionamento")
+                    break
+                else:
+                    print ("Não existe nenhum veiculo com esta placa no estacionamento, verifique se digitou corretamente")
+                    continue
+        else:
+            print("Consulta encerrada.")
+            break
