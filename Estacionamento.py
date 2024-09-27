@@ -1,9 +1,9 @@
 import numpy as np
 import random
 
-SetorA = np.array([1, 2, 3, 4, 5])
-SetorB = np.array([6, 7, 8, 9, 10])
-SetorC = np.array([11, 12, 13, 14, 15])
+A = np.array([1, 2, 3, 4, 5])
+B = np.array([6, 7, 8, 9, 10])
+C = np.array([11, 12, 13, 14, 15])
 Vagas_ocupadas = np.empty(16,dtype=object)
 Placas = np.empty(16,dtype=object)
 vaga = [] 
@@ -16,7 +16,13 @@ while True:
         print ("Todas as vagas estão ocupadas...")
         break     
     vaga = random.randint(1, 15)
-    print(f"Vaga sorteada: {vaga}")
+    if vaga in A:
+        setor = "A"
+    elif vaga in B:
+        setor = "B"
+    else:
+        setor = "C"
+    print(f"A vaga sorteada foi a vaga {vaga}, no setor {setor}")
 
     if vaga in Vagas_ocupadas:
         print("Vaga já ocupada, sorteando outra...")
@@ -37,19 +43,20 @@ while True:
         else:
             Placas[vaga] = placa_carro
             cont -= 1
+            
             break    
     print (Placas)
     while True:
         saida = input("Você deseja sair do estacionamento(S/N)")
         if "S" in saida.upper():
             while True:
+                if  Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
+                    print("não existe nenhum carro estacionado nesse estacionamento")
+                    break
                 vaga_estacionada = int(input("Em qual vaga você estava?"))
                 if Vagas_ocupadas[vaga_estacionada] == None:
                     print('esta vaga não esta ocupada')
                     continue
-                elif Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
-                    print("não existe nenhum carro estacionado nesse estacionamento")
-                    break
                 else:
                     Vagas_ocupadas[vaga_estacionada] = None 
                     Placas [vaga_estacionada] = None
@@ -63,14 +70,14 @@ while True:
         consulta = input ("Você quer consultar algum veiculo? (S/N)")
         if "S" in consulta.upper():
             while True:
+                if  Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
+                    print("não existe nenhum carro estacionado nesse estacionamento")
+                    break
                 placa_consulta = input("digite a placa do carro que você quer consultar")
                 if placa_consulta in Placas:
                     indice_placa = np.where(Placas == placa_consulta)[0][0]
                     vaga_correspondente = Vagas_ocupadas[indice_placa]
-                    print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor ")
-                elif Vagas_ocupadas.size == 0 or not Vagas_ocupadas.any():
-                    print("não existe nenhum carro estacionado nesse estacionamento")
-                    break
+                    print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor {setor}")
                 else:
                     print ("Não existe nenhum veiculo com esta placa no estacionamento, verifique se digitou corretamente")
                     continue
