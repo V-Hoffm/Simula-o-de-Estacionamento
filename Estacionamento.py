@@ -77,6 +77,12 @@ while True:
                 if placa_consulta in Placas:
                     indice_placa = np.where(Placas == placa_consulta)[0][0]
                     vaga_correspondente = Vagas_ocupadas[indice_placa]
+                    if vaga_correspondente in A:
+                        setor = "A"
+                    elif vaga_correspondente in B:
+                        setor = "B"
+                    else:
+                        setor = "C"
                     print (f"O seu carro com a placa {placa_consulta} está na vaga {vaga_correspondente} no setor {setor}")
                 else:
                     print ("Não existe nenhum veiculo com esta placa no estacionamento, verifique se digitou corretamente")
